@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- JQuery import -->
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+
+<body>
+
+<!-- Upload file form -->
+<form id="upload-file-form" enctype="multipart/form-data" method="post" action="/adder/music/add-bad">
+    <label for="upload-file-input-1">Upload your key-file:</label>
+    <input id="upload-file-input-1" type="file" name="uploadKeyFile" accept="*" />
+    <label for="upload-file-input-1">Upload your music file:</label>
+    <input id="upload-file-input-2" type="file" name="uploadMusicFile" accept="*" />
+    <br />
+    <input type="submit">
+
+    <a id="submitJquery" href="#">Submit via JQuery</a>
+</form>
+
+<!-- Javascript functions -->
+<script>
+
+    $(document).ready(function() {
+        $('#submitJquery').click(uploadFile);
+    });
+
+    /**
+     * Upload the file sending it via Ajax at the Spring Boot server.
+     */
+    function uploadFile() {
+        var file1 = $('input[name="uploadKeyFile"]').get(0).files[0];
+        var file2 = $('input[name="uploadMusicFile]"]').get(0).files[0];
+
+        var formData = new FormData();
+        formData.append('file', file2);
+        formData.append('key-file', file1);
+
+        $.ajax({
+            url: "/adder/music/add-bad",
+            type: "POST",
+            data: formData,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (response) {
+                // Handle upload success
+                alert("File succesfully uploaded: " + response);
+            },
+            error: function (response) {
+                // Handle upload error
+                alert("File not uploaded (perhaps it's too much big): " + response);
+            }
+        });
+    } // function uploadFile
+</script>
+
+</body>
+
+</html>
