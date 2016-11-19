@@ -12,12 +12,13 @@
 <form id="upload-file-form" enctype="multipart/form-data" method="post" action="/adder/music/add-bad">
     <label for="upload-file-input-1">Upload your key-file:</label>
     <input id="upload-file-input-1" type="file" name="uploadKeyFile" accept="*" />
+    <br/>
     <label for="upload-file-input-1">Upload your music file:</label>
     <input id="upload-file-input-2" type="file" name="uploadMusicFile" accept="*" />
-    <br />
-    <input type="submit">
+    <br/>
+    <input type="submit" style="display: none">
 
-    <a id="submitJquery" href="#">Submit via JQuery</a>
+    <a id="submitJquery" href="#">Submit</a>
 </form>
 
 <!-- Javascript functions -->
@@ -32,7 +33,7 @@
      */
     function uploadFile() {
         var file1 = $('input[name="uploadKeyFile"]').get(0).files[0];
-        var file2 = $('input[name="uploadMusicFile]"]').get(0).files[0];
+        var file2 = $('input[name="uploadMusicFile"]').get(0).files[0];
 
         var formData = new FormData();
         formData.append('file', file2);

@@ -1,5 +1,8 @@
 package com.github.antego.autorship.music.adder.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class InputData {
 
     private String address;
