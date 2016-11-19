@@ -66,13 +66,14 @@
             processData: false,
             contentType: false,
             cache: false,
-            success: function (response) {
+            success: function (data) {
                 // Handle upload success
-                alert("File succesfully uploaded: " + response);
+                alert("Operation result: " + data);
             },
-            error: function (response) {
+            error: function (data) {
                 // Handle upload error
-                alert("File not uploaded" + response);
+                console.log(data.responseText);
+                alert("File not uploaded: " + data.responseText);
             }
         });
     } // function uploadFile

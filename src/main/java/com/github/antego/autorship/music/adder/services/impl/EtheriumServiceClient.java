@@ -19,13 +19,11 @@ import org.springframework.web.client.RestTemplate;
 public class EtheriumServiceClient implements RestClient<MusicToEtheriumData> {
 
     private static final Logger log = LoggerFactory.getLogger(EtheriumServiceClient.class);
-
+    private final RestTemplate template;
     @Value("${app.etherium.host}")
     private String host;
     @Value("${app.etherium.port}")
     private String port;
-
-    private final RestTemplate template;
 
     @Autowired
     public EtheriumServiceClient(RestTemplate template) {
@@ -59,7 +57,7 @@ public class EtheriumServiceClient implements RestClient<MusicToEtheriumData> {
             throw e;
         } catch (Exception e) {
             log.error("request to etherium -> error", e);
-            throw new EtheriumConnectException("request to etherium -> error, " + e.getMessage());
+            throw new EtheriumConnectException("Error connection to Etherium service.");
         }
     }
 }
