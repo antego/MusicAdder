@@ -29,6 +29,10 @@ h1 {
     color: #f0f0f0;
 }
 
+h4 {
+    color: #ffffff;
+}
+
 .a-my {
     color: #c0c0c0;
 }
@@ -45,9 +49,8 @@ label {
     color: #f0f0f0;
     text-decoration: underline;
 }
-label {
-    font-size: 1em;
-}
+
+
 
 .custom-container {
     padding: 10px;
@@ -62,4 +65,19 @@ label {
 label {
     font-size: 1.5em;
     color: #f0f0f0;
+}
+
+.label-music {
+    max-width: 340px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: normal;
+    padding: 9px;
+    border: 1px;
+    border-color: black;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: middle;
 }

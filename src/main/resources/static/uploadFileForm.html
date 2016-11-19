@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="bootstrap.min.css"></link>
     <script src="jquery.min.js"></script>
     <script src="bootstrap.min.js"></script>
+    <script src="js/fileinput.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/style/style.css"/>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
 </head>
@@ -14,29 +15,30 @@
 <!-- Upload file form -->
 <div class="container custom-container">
     <form id="upload-file-form" enctype="multipart/form-data" method="post" action="/adder/music/add-bad">
+        <h4>Upload your key file</h4>
         <div>
-            <h4>Upload your key-file:</h4>
-            <div class="input-group">
-                <label class="input-group-btn">
-                    <span class="btn btn-primary">
-                        Browse&hellip;
-                        <input id="audioKey" type="file"
-                               accept=".json" style="display: none;"
-                               name="uploadMusicFile" multiple>
-                    </span>
-                </label>
-                <input type="text" class="form-control" readonly>
-            </div>
-            <br/>
+            <label class="btn btn-default" for="key-file-selector" style="padding: 6px 18px">
+                <input name="uploadKeyFile" accept=".json" id="key-file-selector" type="file" style="display:none;" onchange="$('#key-file-info').html($(this).val());">
+                Choose key file
+            </label>
+            <span class='label label-success label-music' id="key-file-info"></span>
+        </div>
+        <h4>Upload your audio mp3 file</h4>
         <div>
+            <label class="btn btn-default" for="audio-file-selector">
+                <input name="uploadMusicFile" accept=".mp3" id="audio-file-selector" type="file" style="display:none;" onchange="$('#audio-file-info').html($(this).val());">
+                Choose audio file
+            </label>
+            <span class='label label-success label-music' id="audio-file-info"></span>
+            <!--
             <label for="audioFile">Upload your music file:</label>
             <input class="form-control input-xl" id="audioFile"
                    type="file" name="uploadMusicFile" accept=".mp3"/>
+                   -->
         </div>
         <br/>
         <div  class="text-right">
             <input type="submit" style="display: none">
-
             <input class="btn btn-default" type="button" id="submitJquery1" value="Submit">
         </div>
     </form>
@@ -67,13 +69,14 @@
             processData: false,
             contentType: false,
             cache: false,
-            success: function (response) {
+            success: function (data) {
                 // Handle upload success
-                alert("File succesfully uploaded: " + response);
+                alert("Operation result: " + data);
             },
-            error: function (response) {
+            error: function (data) {
+                console.log(data.responseText);
                 // Handle upload error
-                alert("File not uploaded: " + response);
+                alert("File not uploaded: " + data.responseText);
             }
         });
     } // function uploadFile
