@@ -1,0 +1,27 @@
+body {
+    background: url("/images/studio.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+h1 {
+    font-size: 5em;
+    color: #f0f0f0;
+}
+
+.a-my {
+    color: #c0c0c0;
+}
+
+
+.a-my:visited {
+    color: #a0a0a0;
+}
+
+.a-my:hover{
+    color: #f0f0f0;
+    text-decoration: underline;
+}
+
+/*.input-xl {*/
+    /*height: 5em;*/
+/*}*/

@@ -2,31 +2,47 @@
 <html>
 
 <head>
-    <!-- JQuery import -->
-    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/style/style.css"/>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
 </head>
 
 <body>
 
 <!-- Upload file form -->
-<form id="upload-file-form" enctype="multipart/form-data" method="post" action="/adder/music/add-bad">
-    <label for="upload-file-input-1">Upload your key-file:</label>
-    <input id="upload-file-input-1" type="file" name="uploadKeyFile" accept="*" />
-    <br/>
-    <label for="upload-file-input-1">Upload your music file:</label>
-    <input id="upload-file-input-2" type="file" name="uploadMusicFile" accept="*" />
-    <br/>
-    <input type="submit" style="display: none">
+<div class="container custom-container">
+    <form id="upload-file-form" enctype="multipart/form-data" method="post" action="/adder/music/add-bad">
+        <div>
+            <label for="upload-file-input-1">Upload your key-file:</label>
+            <input class="form-control input-xl" id="upload-file-input-1" type="file" name="uploadKeyFile" accept="*"/>
+        </div>
+        <br/>
+        <div>
+            <label for="upload-file-input-1">Upload your music file:</label>
+            <input class="form-control input-xl" id="upload-file-input-2" type="file" name="uploadMusicFile"
+                   accept="*"/>
+        </div>
+        <br/>
+        <div>
+            <input type="submit" style="display: none">
 
-    <input type="button" id="submitJquery1" value="Submit">
-</form>
+            <input class="btn btn-default" type="button" id="submitJquery1" value="Submit">
+        </div>
+    </form>
 
-<a href="index.html">Nazad</a>
-
+    <a href="index.html">Nazad</a>
+</div>
 <!-- Javascript functions -->
 <script>
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#submitJquery1').click(uploadFile1);
     });
 
