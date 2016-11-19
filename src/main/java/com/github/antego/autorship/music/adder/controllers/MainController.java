@@ -9,6 +9,6 @@ public class MainController {
 
     @RequestMapping("/")
     public String uploading() {
-        return "uploadFileForm.html";
+        return "index.html";
     }
 }

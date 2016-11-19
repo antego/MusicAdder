@@ -8,17 +8,19 @@
 
 <body>
 
-<!-- Upload file form -->
-<form id="upload-file-form" enctype="multipart/form-data" method="post" action="/adder/music/add-bad">
-    <label for="upload-file-input-1">Upload your key-file:</label>
-    <input id="upload-file-input-1" type="file" name="uploadKeyFile" accept="*" />
+<form id="transfer-file-form" enctype="multipart/form-data" method="post" action="/adder/music/transfer-bad">
+    <label for="transfer-file-input-1">Upload your key-file:</label>
+    <input id="transfer-file-input-1" type="file" name="uploadKeyFile" accept="*" />
     <br/>
-    <label for="upload-file-input-1">Upload your music file:</label>
-    <input id="upload-file-input-2" type="file" name="uploadMusicFile" accept="*" />
+    <label for="transfer-file-input-1">Upload your music file:</label>
+    <input id="transfer-file-input-2" type="file" name="uploadMusicFile" accept="*" />
+    <br/>
+    <label for="transfer-file-input-3">Input address:</label>
+    <input id="transfer-file-input-3" type="text" name="address" accept="*" />
     <br/>
     <input type="submit" style="display: none">
 
-    <input type="button" id="submitJquery1" value="Submit">
+    <input type="button" id="submitJquery2" value="Submit">
 </form>
 
 <a href="index.html">Nazad</a>
@@ -27,22 +29,21 @@
 <script>
 
     $(document).ready(function() {
-        $('#submitJquery1').click(uploadFile1);
+        $('#submitJquery2').click(uploadFile2);
     });
 
-    /**
-     * Upload the file sending it via Ajax at the Spring Boot server.
-     */
-    function uploadFile1() {
+    function uploadFile2() {
         var file1 = $('input[name="uploadKeyFile"]').get(0).files[0];
         var file2 = $('input[name="uploadMusicFile"]').get(0).files[0];
+        var address = $('input[name="address"]').get(0);
 
         var formData = new FormData();
         formData.append('file', file2);
         formData.append('key-file', file1);
+        formData.append('address', address);
 
         $.ajax({
-            url: "/adder/music/add-bad",
+            url: "/adder/music/transfer-bad",
             type: "POST",
             data: formData,
             enctype: 'multipart/form-data',

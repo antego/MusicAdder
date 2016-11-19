@@ -31,7 +31,13 @@ public class WorkWithMusicController {
     private String addMusicUri;
 
     @Value("${app.etherium.addpath.type.request}")
-    private String requestMethod;
+    private String requestMethodAddMusic;
+
+    @Value("${app.etherium.transfer}")
+    private String transferMusicUri;
+
+    @Value("${app.etherium.transfer.type.request}")
+    private String requestMethodTransferMusic;
 
     private final FileToHash musicFileToHash;
 
@@ -49,8 +55,7 @@ public class WorkWithMusicController {
     }
 
     @PostMapping("/add-bad")
-    public ResponseEntity uploadData(@RequestParam("file") MultipartFile file, @RequestParam("key-file") MultipartFile keyFile,
-                                     Model model) {
+    public ResponseEntity uploadData(@RequestParam("file") MultipartFile file, @RequestParam("key-file") MultipartFile keyFile) {
         String fileName = keyFile.getOriginalFilename();
         if (!fileName.endsWith(JSON_END_FILE)) {
             log.error("uploadData -> wrong key-file format {}", fileName);
@@ -59,11 +64,38 @@ public class WorkWithMusicController {
 
         InputData data = deserializableService.deserializable(keyFile);
 
-        return uploadData(file, data, model);
+        return uploadData(file, data);
     }
 
     @PostMapping("/add-well")
-    public ResponseEntity uploadData(@RequestParam("file") MultipartFile file, @RequestBody InputData data, Model model) {
+    public ResponseEntity uploadData(@RequestParam("file") MultipartFile file, @RequestBody InputData data) {
+        String status = processingMusic(file, data, HttpMethod.valueOf(requestMethodAddMusic.toUpperCase()),
+                addMusicUri);
+        return ResponseEntity.ok(status);
+    }
+
+    @PostMapping("/transfer-bad")
+    public ResponseEntity transferData(@RequestParam("file") MultipartFile file, @RequestParam("key-file") MultipartFile keyFile,
+                                       @RequestParam("address") String address) {
+        String fileName = keyFile.getOriginalFilename();
+        if (!fileName.endsWith(JSON_END_FILE)) {
+            log.error("uploadData -> wrong key-file format {}", fileName);
+            throw new IncorrectFileFormatException("incorrect file format");
+        }
+
+        InputData data = deserializableService.deserializable(keyFile);
+        data.setAddress(address);
+
+        return transferData(file, data);
+    }
+
+    @PostMapping("/transfer-well")
+    public ResponseEntity transferData(@RequestParam("file") MultipartFile file, @RequestBody InputData data) {
+        String status = processingMusic(file, data, HttpMethod.valueOf(requestMethodTransferMusic.toUpperCase()), transferMusicUri);
+        return ResponseEntity.ok(status);
+    }
+
+    private String processingMusic(@RequestParam("file") MultipartFile file, @RequestBody InputData data, HttpMethod method, String transferMusicUri) {
         String fileName = file.getOriginalFilename();
         if (!fileName.endsWith(MP3_END_FILE)) {
             log.error("uploadData -> wrong file format {}", fileName);
@@ -78,8 +110,8 @@ public class WorkWithMusicController {
                 .build();
 
 
-        String status = client.request(HttpMethod.valueOf(requestMethod.toUpperCase()), addMusicUri, toEtheriumData);
+        String status = client.request(method, transferMusicUri, toEtheriumData);
         log.info("uploadData -> done. Result = '{}'", status);
-        return ResponseEntity.ok(status);
+        return status;
     }
 }
