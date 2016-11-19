@@ -20,24 +20,31 @@
 <div class="container custom-container">
     <form id="upload-file-form" enctype="multipart/form-data" method="post" action="/adder/music/add-bad">
         <div>
-            <label for="upload-file-input-1">Upload your key-file:</label>
-            <input class="form-control input-xl" id="upload-file-input-1" type="file" name="uploadKeyFile" accept="*"/>
+            <h4>Upload your key-file:</h4>
+            <div class="input-group">
+                <label class="input-group-btn">
+                    <span class="btn btn-primary">
+                        Browse&hellip;
+                        <input id="audioKey" type="file"
+                               accept=".json" style="display: none;"
+                               name="uploadMusicFile" multiple>
+                    </span>
+                </label>
+                <input type="text" class="form-control" readonly>
+            </div>
+            <br/>
+        <div>
+            <label for="audioFile">Upload your music file:</label>
+            <input class="form-control input-xl" id="audioFile"
+                   type="file" name="uploadMusicFile" accept=".mp3"/>
         </div>
         <br/>
-        <div>
-            <label for="upload-file-input-1">Upload your music file:</label>
-            <input class="form-control input-xl" id="upload-file-input-2" type="file" name="uploadMusicFile"
-                   accept="*"/>
-        </div>
-        <br/>
-        <div>
+        <div  class="text-right">
             <input type="submit" style="display: none">
 
             <input class="btn btn-default" type="button" id="submitJquery1" value="Submit">
         </div>
     </form>
-
-    <a href="index.html">Nazad</a>
 </div>
 <!-- Javascript functions -->
 <script>
