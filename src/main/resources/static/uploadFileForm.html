@@ -59,8 +59,8 @@
      * Upload the file sending it via Ajax at the Spring Boot server.
      */
     function uploadFile1() {
-        var file1 = document.getElementById('key-file-selector').files[0];
-        var file2 = document.getElementById('audio-file-selector').files[0]
+        var file1 = $('input[name="uploadKeyFile"]').get(0).files[0];
+        var file2 = $('input[name="uploadMusicFile"]').get(0).files[0];
 
         var formData = new FormData();
         formData.append('file', file2);
