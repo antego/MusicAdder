@@ -55,7 +55,7 @@
     function uploadFile2() {
         var file1 = $('input[name="uploadKeyFile"]').get(0).files[0];
         var file2 = $('input[name="uploadMusicFile"]').get(0).files[0];
-        var address = $('input[name="address"]').get(0);
+        var address = $('input[name="address"]').val();
 
         var formData = new FormData();
         formData.append('file', file2);
