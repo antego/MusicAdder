@@ -10,6 +10,8 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/style/style.css"/>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
 </head>
@@ -20,7 +22,8 @@
         <h4>Upload your key file</h4>
         <div>
             <label class="btn btn-default" for="key-file-selector" style="padding: 6px 18px">
-                <input name="uploadKeyFile" accept=".json" id="key-file-selector" type="file" style="display:none;" onchange="$('#key-file-info').html($(this).val());">
+                <input name="uploadKeyFile" accept=".json" id="key-file-selector" type="file" style="display:none;"
+                       onchange="$('#key-file-info').html($(this).val());">
                 Choose key file
             </label>
             <span class='label label-success label-music' id="key-file-info"></span>
@@ -28,7 +31,8 @@
         <h4>Upload your audio mp3 file</h4>
         <div>
             <label class="btn btn-default" for="audio-file-selector">
-                <input name="uploadMusicFile" accept=".mp3" id="audio-file-selector" type="file" style="display:none;" onchange="$('#audio-file-info').html($(this).val());">
+                <input name="uploadMusicFile" accept=".mp3" id="audio-file-selector" type="file" style="display:none;"
+                       onchange="$('#audio-file-info').html($(this).val());">
                 Choose audio file
             </label>
             <span class='label label-success label-music' id="audio-file-info"></span>
@@ -62,6 +66,22 @@
         formData.append('key-file', file1);
         formData.append('address', address);
 
+        toastr.options.closeButton = true;
+        toastr.options.debug = false;
+        toastr.options.newestOnTop = false;
+        toastr.options.progressBar = false;
+        toastr.options.positionClass = "toast-bottom-right";
+        toastr.options.preventDuplicates = false;
+        toastr.options.onclick = null;
+        toastr.options.showDuration = 300;
+        toastr.options.hideDuration = 1000;
+        toastr.options.timeOut = 5000;
+        toastr.options.extendedTimeOut = 1000;
+        toastr.options.showEasing = "swing";
+        toastr.options.hideEasing = "linear";
+        toastr.options.showMethod = "fadeIn";
+        toastr.options.hideMethod = "fadeOut";
+
         $.ajax({
             url: "/adder/music/transfer-bad",
             type: "POST",
@@ -72,12 +92,14 @@
             cache: false,
             success: function (data) {
                 // Handle upload success
-                alert("Operation result: " + data);
+                //alert("Operation result: " + data);
+                toastr.success("Operation result: " + data);
             },
             error: function (data) {
                 // Handle upload error
                 console.log(data.responseText);
-                alert("File not uploaded: " + data.responseText);
+                //alert("File not uploaded: " + data.responseText);
+                toastr.error("File not uploaded: " + data.responseText);
             }
         });
     } // function uploadFile
