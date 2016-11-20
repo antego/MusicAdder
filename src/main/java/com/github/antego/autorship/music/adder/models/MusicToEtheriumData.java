@@ -1,12 +1,12 @@
 package com.github.antego.autorship.music.adder.models;
 
-import java.math.BigInteger;
-
 public class MusicToEtheriumData {
 
-    String hash;
-    BigInteger senderKey;
-    BigInteger receiverAddress;
+    private String hash;
+    private Account account;
+
+    public MusicToEtheriumData() {
+    }
 
     public String getHash() {
         return hash;
@@ -16,19 +16,11 @@ public class MusicToEtheriumData {
         this.hash = hash;
     }
 
-    public BigInteger getSenderKey() {
-        return senderKey;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setSenderKey(BigInteger senderKey) {
-        this.senderKey = senderKey;
-    }
-
-    public BigInteger getReceiverAddress() {
-        return receiverAddress;
-    }
-
-    public void setReceiverAddress(BigInteger receiverAddress) {
-        this.receiverAddress = receiverAddress;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

@@ -1,8 +1,7 @@
 package com.github.antego.autorship.music.adder.models.builders;
 
+import com.github.antego.autorship.music.adder.models.Account;
 import com.github.antego.autorship.music.adder.models.MusicToEtheriumData;
-
-import java.math.BigInteger;
 
 public class MusicToEtheriumBuilder {
 
@@ -33,10 +32,13 @@ public class MusicToEtheriumBuilder {
     }
 
     public MusicToEtheriumData build() {
+        Account account = new Account();
+        account.setAddress(address);
+        account.setPrivateKey(privateKey);
+
         MusicToEtheriumData data = new MusicToEtheriumData();
         data.setHash(hash);
-        data.setReceiverAddress(new BigInteger(address));
-        data.setSenderKey(new BigInteger(privateKey));
+        data.setAccount(account);
 
         return data;
     }
